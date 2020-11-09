@@ -1,0 +1,19 @@
+main {
+    background-color: aquamarine;
+}
+
+.one {
+    background-color: blueviolet;
+}
+
+ul li {
+    list-style: none;
+}
+
+.img {
+    width: 100px;
+}
+
+img {
+    width: 100%;
+}

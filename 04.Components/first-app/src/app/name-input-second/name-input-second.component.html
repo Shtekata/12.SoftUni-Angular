@@ -1,0 +1,7 @@
+<p>name-input-second works!</p>
+
+<input type="text" #inputEl>
+<!-- const inputEl=document.createElement('input'); -->
+{{inputEl.value}}
+
+<button (click)="btnClickHandler($event, inputEl)">Click me!</button>

@@ -1,0 +1,41 @@
+<main>
+    <h1>Hello Asen!</h1>
+    <h1>Hello Asen!</h1>
+    <h1>Hello Asen!</h1>
+    <h2 class="one">{{mitle}}</h2>
+    <h1>Hello Asen, again!</h1>
+    <h1>Hello Asen, again!</h1>
+    <h1>Hello Asen, again!</h1>
+    <app-home></app-home>
+    <app-mome *ngIf="isVisible"></app-mome>
+    <app-name-input></app-name-input>
+
+    <hr>
+    <button (click)="toggleHandler()">Toggle</button>
+    <div *ngIf="isVisible">IS VISIBLE</div>
+    <div *ngIf="!isVisible">IS NOT VISIBLE</div>
+
+    <!-- <button (click)="isVisible = !isVisible">Toggle</button>
+    <div *ngIf="isVisible && (3 < 5)">IS VISIBLE</div> -->
+    <hr>
+
+    <ul>
+        <li *ngFor="let user of users; let a = index;">
+            <span>{{a+1}}. </span> <span>{{user.firstName}}</span> - <span>{{user.lastName}}</span> / <span
+                *ngIf="user.age > 31">{{user.age}}</span>
+        </li>
+    </ul>
+    <hr>
+
+    <div class="img">
+        <img [src]="mySRC" alt="ballon">
+    </div>
+
+    <app-name-input-second></app-name-input-second>
+    <!-- <app-name-input-third [inputValue]="'Asen'"></app-name-input-third> -->
+    <app-name-input-third inputValue="Asen"></app-name-input-third>
+    <app-name-input-fourth (btnClick)="nameInputBtnClickHandler($event)" [inputValue]="nameInputValue"
+        *ngIf="isVisible">
+    </app-name-input-fourth>
+
+</main>

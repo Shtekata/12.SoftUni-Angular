@@ -1,0 +1,10 @@
+<!-- <input type="text" value="{{inputValue}}"> -->
+<!-- <input type="text" [value]="inputValue" (keyup)="inputKeyupHandler($event)"> -->
+<input type="text" [value]="inputValue" (keyup)="inputKeyupHandler($event.target)">
+
+
+
+<!-- <button (click)="btnClickHandler('TEXT')">Click me!</button> -->
+<button (click)="btnClickHandler($event)">Click me!</button>
+
+{{inputValue}}

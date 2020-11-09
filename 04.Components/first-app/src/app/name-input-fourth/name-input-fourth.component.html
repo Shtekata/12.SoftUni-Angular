@@ -1,0 +1,6 @@
+<p>name-input-fourth works!</p>
+
+<input type="text" [value]="inputValue" #inputEl>
+{{inputEl.value}}
+
+<button (click)="btnClickHandler($event, inputEl)">Click me!</button>
