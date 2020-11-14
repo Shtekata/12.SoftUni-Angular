@@ -1,0 +1,12 @@
+<h1>Hello from App-Root!</h1>
+
+<div *ngIf='users===null'>Loading...</div>
+<div *ngIf='users!==null'>
+    <ul>
+        <li *ngFor='let x of users'>{{x.username}} : {{x.email}} : {{x.phone}}</li>
+    </ul>
+</div>
+
+
+<app-name-input></app-name-input>
+<app-test [obj]="data"></app-test>
