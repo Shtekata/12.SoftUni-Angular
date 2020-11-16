@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Test05": {
+    "ng-workshop": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Test05",
+            "outputPath": "dist/ng-workshop",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Test05:build"
+            "browserTarget": "ng-workshop:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Test05:build:production"
+              "browserTarget": "ng-workshop:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Test05:build"
+            "browserTarget": "ng-workshop:build"
           }
         },
         "test": {
@@ -109,19 +109,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Test05:serve"
+            "devServerTarget": "ng-workshop:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Test05:serve:production"
+              "devServerTarget": "ng-workshop:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Test05",
+  "defaultProject": "ng-workshop",
   "cli": {
-    "analytics": "ed8a2ad3-d6db-450e-812f-0e69857d3a6c"
+    "analytics": "b14ef523-b529-4c5f-b788-6bb372ba8a8c"
   }
 }
