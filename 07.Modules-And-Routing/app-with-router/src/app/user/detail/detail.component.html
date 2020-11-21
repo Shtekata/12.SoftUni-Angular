@@ -1,0 +1,12 @@
+<a class="aqua" *ngIf='currentUserId-1>0' [routerLink]='["/user/detail/",currentUserId-1]'>Prev User</a>
+<a class="aqua" *ngIf='currentUserId!==count' [routerLink]='["/user/detail/",currentUserId+1]'>Next User</a>
+<app-loader [showLoader]='!user'></app-loader>
+<div *ngIf='user'>
+    <h5>{{user.name}}</h5>
+    <h5>{{user.email}}</h5>
+    <h5>{{user.address.street}}</h5>
+    <a routerLink='/user/list'>Back</a>
+    <button routerLink='/user/list'>Back</button>
+    <p>User Id: {{user.id}}</p>
+    <p>Count: {{count}}</p>
+</div>
