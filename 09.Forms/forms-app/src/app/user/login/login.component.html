@@ -1,0 +1,37 @@
+<form action="" #f='ngForm' (ngSubmit)='loginHandler(f.value)'>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input #emailInput='ngModel' type="text" name="email" id="email" ngModel='geshGeshGesh' required email>
+        <!-- [(ngModel)]='login.email'> -->
+        <div *ngIf='emailInput.touched&&emailInput.errors?.required' class="validation-error">Email is required!</div>
+        <div *ngIf='emailInput.errors?.email'>Email is invalid!</div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input #passwordInput='ngModel' type="password" name="password" id="password" [ngModel]='defaultPassword'
+            required>
+        <div *ngIf='passwordInput.touched&&passwordInput.errors?.required' class="validation-error">Password is
+            required!</div>
+    </div>
+    <div ngModelGroup='address'>
+        <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" name="street" id="street" ngModel required>
+        </div>
+        <div class="form-group">
+            <label for="post-code">Post Code</label>
+            <input type="text" name="postCode" id="post-code" ngModel required>
+        </div>
+    </div>
+    <button [disabled]='f.invalid'>Login</button>
+    <button (click)='reset()'>RESET</button>
+    <button (click)='setValue()'>SET VALUE</button>
+</form>
+<hr>
+<div>f.value: {{f.value|json}}</div>
+<div>emailInput.errors: {{emailInput.errors|json}}</div>
+<div>emailInput.errors?.required: {{emailInput.errors?.required|json}}</div>
+<div *ngIf=''>Test</div>
+<div>emailInput.touched: {{emailInput.touched|json}}</div>
+<div>emailInput.errors?.email: {{emailInput.errors?.email|json}}</div>
+<div>f.invalid: {{f.invalid|json}}</div>

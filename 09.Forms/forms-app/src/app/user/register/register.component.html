@@ -1,0 +1,33 @@
+<form [formGroup]='form' (ngSubmit)='registerHandler()'>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input formControlName='email' type="text" name="email" id="email">
+        <div *ngIf='form.get("email")?.touched&&form.get("email")?.errors?.required' class="validation-error">Email is
+            required!</div>
+        <div *ngIf='form.get("email")?.errors?.email'>Email is invalid!</div>
+        <div>{{form.get("email")?.errors|json}}</div>
+    </div>
+    <div class=" form-group">
+        <label for="password">Password</label>
+        <input formControlName='password' type="password" name="password" id="password">
+        <div *ngIf='form.get("password")?.touched && form.get("password")?.errors?.required' class="validation-error">
+            Password is required!</div>
+        <div *ngIf='form.get("password")?.errors?.minlength'>Password should be more than
+            {{form.get('password')?.errors?.minlength.requiredLength|json}} chars!</div>
+        <div>{{form.get('password')?.errors|json}}</div>
+    </div>
+    <div formGroupName='address'>
+        <div>
+            <label for="street">Street</label>
+            <input formControlName='street' type="text" name="street" id="street">
+        </div>
+        <div>
+            <label for="postCode">Post Code</label>
+            <input formControlName='postCode' type="text" name="post-code" id="postCode">
+            <!-- <input [formControl]='form.get("address")?.get("postCode")' type="text" name="post-code" id="postCode"> -->
+        </div>
+    </div>
+    <button [disabled]='form.invalid'>Register</button>
+</form>
+<hr>
+<div>Form: {{form.value|json}}</div>

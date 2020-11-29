@@ -1,0 +1,47 @@
+<div [ngClass]='{"my-class": hasMyClass, "my-other-class": hasMyOtherClass}'></div>
+
+{{isHighlighted}}
+<p [appHighlight]='isHighlighted' backgroundColor='brown'>SOME TEXT</p>
+<!-- <button (click)='toggleHighlightHandler()'>Toggle Highlight</button> -->
+<!-- <button (click)='toggleHighlightHandler(paragraph)'>Toggle Highlight</button> -->
+<button (click)='toggleHighlightHandler(paragraphExpDirective)'>Toggle Highlight</button>
+
+<div *ngIf='isHighlighted else elseTemplate'>IS HIGHLIGHTED</div>
+<ng-template #elseTemplate>
+    <div>IS NOT HIGHLIGHTED</div>
+</ng-template>
+
+<ng-template [ngIf]='isHighlighted'>
+    <div>IS HIGHLIGHTED</div>
+</ng-template>
+<ng-template [ngIf]='true'>
+    <p>AAAAAAA!</p>
+</ng-template>
+
+<div *ngFor='let user of users'>{{user.name}} : {{user.age}}</div>
+<ng-template ngFor [ngForOf]='users' let-user>
+    <div>{{user.name}} : {{user.age}}</div>
+</ng-template>
+
+<ng-template #ifTemplateNg>
+    <div>IS HIGHLITED</div>
+</ng-template>
+<ng-template #elseTemplateNg>
+    <div>IS NOT HIGHLITED</div>
+</ng-template>
+<ng-container *ngTemplateOutlet='isHighlighted?ifTemplateNg:elseTemplateNg'></ng-container>
+<ng-container *ngIf='isHighlighted'>TEST</ng-container>
+
+<ng-template #templateTest let-text let-nindex='mindex'>
+    <div>Hello, {{text}} !!!</div>
+    <div>index: {{nindex}}</div>
+</ng-template>
+<ng-container
+    *ngTemplateOutlet='templateTest context:{$implicit:isHighlighted?"AsenHighlighted":"BesenHighlighted",mindex:111}'>
+</ng-container>
+
+<p #paragraph [appHighlight]='isHighlighted' backgroundColor='brown'>SOME OTHER TEXT</p>
+{{paragraph.outerHTML}}
+
+<p #paragraphExpDirective='exportAppHighlightDirective' [appHighlight]='isHighlighted' backgroundColor='brown'>EXPORTED
+    DIRECTIVE</p>
