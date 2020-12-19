@@ -1,0 +1,8 @@
+<p>home works!</p>
+{{counter}}
+
+<p>{{calculateAvrAge(users)}}</p>
+<p>{{users|avgAge: 'UNKNOWN' : 100}}</p>
+<p>{{avrUsers}}</p>
+<hr>
+<div *ngFor='let user of users'>{{user.name}} / {{user.age}}</div>

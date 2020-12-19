@@ -1,0 +1,22 @@
+<a class="aqua" *ngIf='currentUserId-1>0' [routerLink]='["/user/detail/",currentUserId-1]'
+    (click)='clickHandler(currentUserId-1)'>Prev
+    User</a>
+<a class="aqua" *ngIf='currentUserId!==(userListCount$|async)' [routerLink]='["/user/detail/",currentUserId+1]'
+    (click)='clickHandler(currentUserId+1)'>Next
+    User</a>
+<app-loader [showLoader]='!(user$|async)'></app-loader>
+<div *ngIf="(user$|async) as u">
+    <h2>{{u.name}}</h2>
+    <h3>{{(user$|async)?.name}}</h3>
+    <h4>{{user.name}}</h4>
+    <h5>{{user.email}}</h5>
+    <h5>{{user.address.street}}</h5>
+    <a routerLink='/user/list'>Back</a>
+    <button routerLink='/user/list'>Back</button>
+    <p>User Id: {{user.id}}</p>
+    <p>Count: {{count}}</p>
+</div>
+<p *ngIf="(userListCount$|async) as usersCount">Length: {{usersCount}}</p>
+<p>UserListCount$: {{(userListCount$|async)|json}}</p>
+<p>User$: {{user$|async|json}}</p>
+<p>UserList$: {{(userList$|async)|json}}</p>

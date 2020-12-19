@@ -51,7 +51,7 @@ const routes: Routes = [
                 }
             },
             {
-                path: 'theme/detail/:id',
+                path: 'detail/:id',
                 component: DetailComponent,
                 data: {
                     title: 'THEME DETAIL'
