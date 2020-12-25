@@ -1,0 +1,47 @@
+<header *ngIf='isReady$|async'>
+    <div class="mini-navbar-wrap">
+        <div class="logo-wrap">
+            <p class="logo"><span class="logo">SoftUni Forum</span></p>
+        </div>
+        <div class="mini-navbar" *ngIf='!isLogged$|async'>
+            <ul>
+                <li>
+                    <!-- <a (click)='loginHandler()'>Login</a> -->
+                    <a routerLink='/user/login'>Login</a>
+                </li>
+                <li>
+                    <a routerLink='/user/register'>Register</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mini-navbar" *ngIf='isLogged$|async'>
+            <ul>
+                <li>
+                    <a routerLink='/user/profile'>{{(currentUser$|async)?.username}}</a>
+                </li>
+                <li>
+                    <a (click)='logoutHandler()'>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li>
+                <a routerLink='/home'>Home</a>
+            </li>
+            <li>
+                <a routerLink='/theme'>Themes</a>
+            </li>
+            <li>
+                <a *ngIf='(currentUser$|async)' routerLink='/theme/new'>New Theme</a>
+                <a *ngIf='!(currentUser$|async)' routerLink='/user/login'>New Theme</a>
+            </li>
+            <li>
+                User: {{(currentUser$|async)?.username|json}}
+            </li>
+        </ul>
+        <p class="notification error-info-message">{{errorInfoMessage}}</p>
+        <p class="notification error-strong-message">{{errorStrongMessage}}</p>
+    </nav>
+</header>
