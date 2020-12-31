@@ -1,0 +1,21 @@
+<input #filter type="text">
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Name</th>
+    </tr>
+    <tr *ngFor='let user of (users$|async)'>
+        <td>{{user.username}}</td>
+        <td>{{user.name}}</td>
+    </tr>
+</table>
+
+<ng-template #content>
+    <router-outlet></router-outlet>
+</ng-template>
+
+<ng-template #loading>
+    <div>LOADING...</div>
+</ng-template>
+
+<ng-container *ngTemplateOutlet='(isReady$|async)?content:loading'></ng-container>

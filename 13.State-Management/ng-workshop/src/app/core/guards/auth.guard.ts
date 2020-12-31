@@ -1,0 +1,71 @@
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { first, map, switchMap, tap } from 'rxjs/operators';
+import { IUser } from '../../shared/interfaces';
+import { AuthService } from '../auth.service';
+
+@Injectable()
+export class AuthGuard implements CanActivate, CanActivateChild{
+
+constructor(private authService: AuthService, private router: Router){}
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+        // let stream$: Observable<IUser | null>;
+        
+        // if (this.authService.currentUser === undefined) {
+        //     stream$ = this.authService.authenticate();
+        // } else {
+        //     stream$ = of(this.authService.currentUser);
+        // }
+
+        const stream$ = this.authService.currentUser$.pipe(
+            switchMap(x => x === undefined ? this.authService.authenticate() : [x])
+        );
+
+        // const isLoggedFromData = route.data.isLogged;
+        // if (typeof isLoggedFromData === 'boolean' && isLoggedFromData === this.authService.isLogged) {
+        //     return true;
+        // }
+        // // this.router.navigate(['']);
+        // const url = this.router.url;
+        // this.router.navigateByUrl(url);
+        // return false;
+        return stream$.pipe(
+            // tap((x: IUser | null) => {
+            //    const isLoggedFromData = route.data.isLogged;
+            //    if (typeof isLoggedFromData !== 'boolean' || isLoggedFromData === !!x) { return; }
+            //    const url = this.router.url;
+            //    this.router.navigateByUrl(url);
+            // }),
+            // map(x => x === null ? true : !!x)
+            map((x: IUser | null) => {
+                const isLoggedFromData = route.data.isLogged;
+                return typeof isLoggedFromData !== 'boolean' || isLoggedFromData === !!x;
+            }),
+            tap((canContinue) => {
+                if (canContinue) { return; }
+                const url = this.router.url;
+                this.router.navigateByUrl(url);
+            }),
+            first()
+        );
+    }
+
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+        
+        return this.authService.currentUser$.pipe(
+            switchMap(x => x === undefined ? this.authService.authenticate() : [x]),
+            map((x: IUser | null) => {
+                const isLoggedFromData = childRoute.data.isLogged;
+                return typeof isLoggedFromData !== 'boolean' || isLoggedFromData === !!x;
+            }),
+            tap((canContinue) => {
+                if (canContinue) { return; }
+                const url = this.router.url;
+                this.router.navigateByUrl(url);
+            }),
+            first()
+        );
+    }
+}

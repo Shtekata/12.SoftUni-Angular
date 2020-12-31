@@ -1,0 +1,58 @@
+<ng-template #defaultMode let-inEditMode>
+    <div class="flex">
+        <p>Username: </p>
+        <p>{{(currentUser$|async)?.username}}</p>
+    </div>
+    <div class="flex">
+        <p>Email: </p>
+        <p>{{(currentUser$|async)?.email}}</p>
+    </div>
+    <div class="flex">
+        <p>Phone: </p>
+        <p>+359 {{(currentUser$|async)?.tel}}</p>
+    </div>
+    <button [disabled]='isLoading$|async' class="edit-button" (click)='toggleEditMode(inEditMode)'>Edit</button>
+</ng-template>
+
+<ng-template #editMode let-inEditMode>
+    <form #f='ngForm' (ngSubmit)='submitHandler(f.value)'>
+        <div class="flex">
+            <p>Username: </p>
+            <input #username='ngModel' [class.input-error]='username.invalid' type="text" name="username" id="username"
+                [ngModel]='(currentUser$|async)?.username' required minlength='5'>
+        </div>
+        <p *ngIf='username.touched&&username.errors?.required' class="error">Username is required.</p>
+        <p *ngIf='username.touched&&username.errors?.minlength' class="error">Username must be at least 5characters
+            long.</p>
+        <div class="flex">
+            <p>Email: </p>
+            <input #email='ngModel' [class.input-error]='email.invalid' type="email" name="email" id="email"
+                [ngModel]='(currentUser$|async)?.email' required appEmailValidator>
+        </div>
+        <p *ngIf='email.touched&&email.errors?.required' class="error">Email is required.</p>
+        <p *ngIf='email.touched&&email.errors?.regexNotMatch' class="error">Email is not valid!</p>
+        <div class="flex">
+            <p>Phone: </p>
+            <div>
+                <select name="select-tel" id="select-tel" class="tel">
+                    <option value="00359">+359</option>
+                    <option value="00359">+369</option>
+                    <option value="00359">+379</option>
+                </select>
+                <input type="text" name="tel" id="tel" [ngModel]='(currentUser$|async)?.tel'>
+            </div>
+        </div>
+        <button [disabled]='isLoading$|async' class="green-button">Save</button>
+        <button [disabled]='isLoading$|async' type="button" class="red-button"
+            (click)='toggleEditMode(inEditMode)'>Cancel</button>
+    </form>
+</ng-template>
+
+<div class="profile">
+    <img src="assets/images/profile.png" alt="default user">
+    <h3>User Info:</h3>
+    <ng-container
+        *ngTemplateOutlet='(inEditMode$|async)?editMode:defaultMode context: { $implicit: (inEditMode$|async) }'>
+    </ng-container>
+    <app-loader [isLoading]='isLoading$|async'></app-loader>
+</div>

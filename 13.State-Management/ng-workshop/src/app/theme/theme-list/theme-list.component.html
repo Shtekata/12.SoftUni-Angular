@@ -1,0 +1,7 @@
+<div class="theme-title" *ngIf="themeList$|async as themeList">
+    <!-- <app-welcome></app-welcome> -->
+    <ng-content></ng-content>
+    <app-theme-list-item *ngFor='let theme of themeList' [theme]='theme'></app-theme-list-item>
+    <div *ngIf='themeList.length===0'>No Posts!</div>
+</div>
+<div *ngIf='isLoading$|async'>Loading...</div>

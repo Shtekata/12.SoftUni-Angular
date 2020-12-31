@@ -20,9 +20,10 @@ export class AuthService {
     // });
   }
 
-  updateCurrentUser(user: IUser | null): Observable<any>{
+  // updateCurrentUser(user: IUser | null): Observable<any>{
+  updateCurrentUser(user: IUser | null): void{
     this._currentUser.next(user);
-    return of(user);
+    // return of(user);
   }
 
   // GET /users?email=email&password=12345&action=login

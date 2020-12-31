@@ -1,0 +1,33 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css';
+@import url('./assets/css/reset.css');
+@import url('./assets/css/layout.css');
+@import url('./assets/css/typography.css');
+@import url('./assets/css/responsive.css');
+body {
+    max-width: 1366px;
+    margin: auto;
+    position: relative;
+    min-height: 100vh;
+}
+
+h2 {
+    text-align: center;
+    border-bottom: 1px dashed #999;
+}
+
+span {
+    font-weight: bold;
+}
+
+button {
+    background-color: #4ebced;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.container {
+    margin-bottom: 75px;
+}
