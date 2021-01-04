@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 import { IPost, ITheme } from 'src/app/shared/interfaces';
 import { IThemeModuleState } from '../+store';
-import { themeDetailClearTheme, themeDetailSetIsLoading, themeDetailSetTheme } from '../+store/actions';
+import { themeDetailClearTheme, themeDetailLoadThemeDetail, themeDetailSetIsLoading, themeDetailSetTheme } from '../+store/actions';
 // import { UserService } from 'src/app/user/user.service';
 import { ThemeService } from '../theme.service';
 
@@ -33,8 +33,9 @@ export class DetailComponent implements OnInit, DoCheck, OnDestroy {
     const id = activatedRoot.snapshot.params.id;
     // themeService.loadTheme(id).subscribe(x => this.theme = x);
     
-    this.store.dispatch(themeDetailSetIsLoading({ isLoading: true }));
-    themeService.loadTheme(id).subscribe(x => this.store.dispatch(themeDetailSetTheme({ theme: x })));
+    // this.store.dispatch(themeDetailSetIsLoading({ isLoading: true }));
+    // themeService.loadTheme(id).subscribe(x => this.store.dispatch(themeDetailSetTheme({ theme: x })));
+    this.store.dispatch(themeDetailLoadThemeDetail({ id: id }));
   }
 
   ngOnInit(): void {

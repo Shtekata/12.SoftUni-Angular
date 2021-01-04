@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { PostService } from 'src/app/post/post.service';
 import { ThemeService } from '../theme.service';
-import { themeListLoadThemeList, themeListLoadThemeListError, themeListSetThemeList, themeLoadPostList, themeLoadPostListError, themeSetPostList } from './actions';
+import { themeDetailLoadThemeDetail, themeDetailLoadThemeDetailError, themeDetailSetTheme, themeListLoadThemeList, themeListLoadThemeListError, themeListSetThemeList, themeLoadPostList, themeLoadPostListError, themeSetPostList } from './actions';
 
 @Injectable()
 export class ThemeListEffects{
@@ -12,6 +12,14 @@ export class ThemeListEffects{
         private themeService: ThemeService,
         private postService: PostService
     ) { }
+
+    loadTheme$ = createEffect(() => this.actions$.pipe(
+        ofType(themeDetailLoadThemeDetail),
+        switchMap((x) => this.themeService.loadTheme(x.id).pipe(catchError((err) => [new Error(err)]))),
+        map(
+            x => x instanceof Error ?
+                themeDetailLoadThemeDetailError({ error: x.message }) : themeDetailSetTheme({ theme: x }))
+    ));
 
     loadThemeList$ = createEffect(() => this.actions$.pipe(
         ofType(themeListLoadThemeList),

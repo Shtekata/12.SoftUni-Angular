@@ -5,6 +5,8 @@ const themeDetailNamespace = '[THEME DETAIL]';
 export const themeDetailSetTheme = createAction(`${themeDetailNamespace} Set Theme`, props<{ theme: ITheme<IPost, string> }>());
 export const themeDetailSetIsLoading = createAction(`${themeDetailNamespace} Set Is Loading`, props<{ isLoading: boolean }>());
 export const themeDetailClearTheme = createAction(`${themeDetailNamespace} Clear`);
+export const themeDetailLoadThemeDetail = createAction(`${themeDetailNamespace} Load Theme Detail`, props<{ id: string }>());
+export const themeDetailLoadThemeDetailError = createAction(`${themeDetailNamespace} Load Theme Detail Error`, props<{ error: string }>());
 
 const themeListNamespace = '[THEME LIST]';
 export const themeListSetThemeList = createAction(`${themeListNamespace} Set Theme List`, props<{ themeList: ITheme[] }>());

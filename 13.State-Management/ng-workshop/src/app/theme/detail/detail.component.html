@@ -1,4 +1,5 @@
 <app-home></app-home>
+<app-loader [isLoading]='isLoading$|async'></app-loader>
 <div *ngIf="theme$|async as theme" class="theme-content">
     <div class="theme-title">
         <div class="theme-name-wrapper">
@@ -41,4 +42,3 @@
         </div>
     </div>
 </div>
-<app-loader [isLoading]='isLoading$'></app-loader>
